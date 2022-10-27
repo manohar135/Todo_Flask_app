@@ -26,11 +26,11 @@
             <div class="d-flex flex-row-reverse col-4">
                 <a href="{{url_for('view', sno = allsno[allsno.index(todo.sno) + 1])}}" type="button" class="btn btn-primary">Next ></a>     
             </div>
-            {% elif todo.sno == allsno[0] %}
+            {% elif todo.sno == allsno[0] and allsno|length > 1%}
             <div class="d-flex flex-row-reverse">
                 <a href="{{url_for('view', sno = allsno[1])}}" type="button" class="btn btn-primary">Next ></a>     
             </div>
-            {% elif todo.sno == allsno[-1] %}
+            {% elif todo.sno == allsno[-1] and allsno|length > 1%}
             <div class="d-flex flex-row col-4">
                 <a href="{{url_for('view', sno = allsno[-2])}}" type="button" class="btn btn-secondary"> < Privious</a>
             </div>
