@@ -66,13 +66,11 @@ def update(sno):
         desc = request.form['desc']
         time = request.form['time']
         date = request.form['date']
-        ph_num = request.form['phno']
-        if '' not in [title, desc, date, time, ph_num]:
+        if '' not in [title, desc, date, time]:
             date_time = convert(date, time)
             up_todo = TodoModel.query.filter_by(sno = sno).first()
             up_todo.title = title
             up_todo.desc = desc
-            up_todo.ph_num = ph_num
             up_todo.date_time = date_time
             db.session.add(up_todo)
             db.session.commit()
