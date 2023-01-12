@@ -13,11 +13,14 @@ import math
 
 db = SQLAlchemy()
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Todo_DB.db"
 app.config['SECRET_KEY'] = 'todosecretkey'
 db.init_app(app)
 
+#Used for password Decryption and Encryption
+bcrypt = Bcrypt(app)
+
+#Built in module of flask to Manage the login information
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -26,6 +29,7 @@ login_manager.login_view = 'login'
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+#User database with there attribute
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique = True)
@@ -39,7 +43,7 @@ class TodoModel(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     date_time = db.Column(db.String(30))
 
-
+#Creating a register form class
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
     password = PasswordField('Password', [validators.Regexp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$', message='Password should contain at least one uppercase letter, one number, and is at least 8 characters long')], render_kw={"placeholder": "Password"})
@@ -52,13 +56,13 @@ class RegisterForm(FlaskForm):
         if exist_username:
             raise ValidationError("Username allready exist")
 
-
+#creating a login form class
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Login")
 
-
+#Creating the above database only once
 with app.app_context():
     db.create_all()
 
