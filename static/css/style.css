@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+}
+  
+input[type=number] {
+    appearance: textfield;
+}
+
+.bg-color{
+    background: #83a4d4;
+    background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);
+    background: linear-gradient(to right, #b6fbff, #83a4d4); 
+}
+
+.log {
+    height: 100vh;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 30px;
+    background: #ffffff;
+}
+
+.login h1 {
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+.login form {
+    font-size: 20px;
+}
+
+.mt-100{
+    margin-top: 100px;
+}
+
